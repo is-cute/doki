@@ -181,7 +181,7 @@ export default class implements Command {
           'Wait time before leaving the voice channel': config.secondsToWaitAfterQueueEmpties === 0
             ? 'Never'
             : `${config.secondsToWaitAfterQueueEmpties}s`,
-          'whether to leave when all participants leave': config.leaveIfNoListeners ? 'Yes' : 'No',
+          'Whether to leave when all participants leave': config.leaveIfNoListeners ? 'Yes' : 'No',
           'Whether to automatically announce the next song in the queue': config.autoAnnounceNextSong ? 'Yes' : 'No',
           'Whether to display queue additions only to the requester': config.queueAddResponseEphemeral ? 'Yes' : 'No',
           'Default volume': config.defaultVolume,

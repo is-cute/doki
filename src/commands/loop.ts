@@ -10,7 +10,7 @@ import {STATUS} from '../services/player.js';
 export default class implements Command {
   public readonly slashCommand = new SlashCommandBuilder()
     .setName('loop')
-    .setDescription('Toggle song looping');
+    .setDescription('Toggles song loop');
 
   public requiresVC = true;
 

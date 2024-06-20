@@ -10,7 +10,7 @@ import {STATUS} from '../services/player.js';
 export default class implements Command {
   public readonly slashCommand = new SlashCommandBuilder()
     .setName('loop-queue')
-    .setDescription('Toggle queue looping');
+    .setDescription('Toggles queue loop');
 
   public requiresVC = true;
 

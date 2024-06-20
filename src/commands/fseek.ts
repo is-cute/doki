@@ -11,7 +11,7 @@ import durationStringToSeconds from '../utils/duration-string-to-seconds.js';
 export default class implements Command {
   public readonly slashCommand = new SlashCommandBuilder()
     .setName('fseek')
-    .setDescription('Seek forward in the current song')
+    .setDescription('Seeks forward from the current position in the current song')
     .addStringOption(option => option
       .setName('time')
       .setDescription('An interval expression or number of seconds (e.g. 1m, 30s, 100)')

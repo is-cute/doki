@@ -15,7 +15,7 @@ import AddQueryToQueue from '../services/add-query-to-queue.js';
 export default class implements Command {
   public readonly slashCommand = new SlashCommandBuilder()
     .setName('play')
-    .setDescription('play a song')
+    .setDescription('Adds the selected song to queue')
     .addStringOption(option => option
       .setName('query')
       .setDescription('YouTube URL, Spotify URL, or search query')
@@ -23,13 +23,13 @@ export default class implements Command {
       .setRequired(true))
     .addBooleanOption(option => option
       .setName('immediate')
-      .setDescription('add track to the front of the queue'))
+      .setDescription('Whether to add the track to the front of the queue'))
     .addBooleanOption(option => option
       .setName('shuffle')
-      .setDescription('shuffle the input if you\'re adding multiple tracks'))
+      .setDescription('Whether to shuffle the input (for multiple tracks)'))
     .addBooleanOption(option => option
       .setName('split')
-      .setDescription('if a track has chapters, split it'));
+      .setDescription('Whether to split the track'));
 
   public requiresVC = true;
 

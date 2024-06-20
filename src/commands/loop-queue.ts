@@ -10,7 +10,7 @@ import {STATUS} from '../services/player.js';
 export default class implements Command {
   public readonly slashCommand = new SlashCommandBuilder()
     .setName('loop-queue')
-    .setDescription('toggle looping the entire queue');
+    .setDescription('Toggle queue looping');
 
   public requiresVC = true;
 
@@ -24,11 +24,11 @@ export default class implements Command {
     const player = this.playerManager.get(interaction.guild!.id);
 
     if (player.status === STATUS.IDLE) {
-      throw new Error('no songs to loop!');
+      throw new Error('No songs available to loop.');
     }
 
     if (player.queueSize() < 2) {
-      throw new Error('not enough songs to loop a queue!');
+      throw new Error('Not enough songs available to loop the queue.');
     }
 
     if (player.loopCurrentSong) {
@@ -37,6 +37,6 @@ export default class implements Command {
 
     player.loopCurrentQueue = !player.loopCurrentQueue;
 
-    await interaction.reply((player.loopCurrentQueue ? 'looped queue :)' : 'stopped looping queue :('));
+    await interaction.reply((player.loopCurrentQueue ? '✅ Queue loop enabled.' : '⛔ Queue loop stopped.'));
   }
 }

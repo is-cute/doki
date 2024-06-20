@@ -40,5 +40,5 @@ export default async (guild: Guild): Promise<void> => {
   }
 
   const owner = await guild.fetchOwner();
-  await owner.send('👋 Hi! Someone (probably you) just invited me to a server you own. By default, I\'m usable by all guild member in all guild channels. To change this, check out the wiki page on permissions: https://github.com/codetheweb/muse/wiki/Configuring-Bot-Permissions.');
+  await owner.send('👋 Welcome to Doki! By default, Doki is usable by all members in all channels. If you wish to change this setting, see the wiki page on configuring Doki\'s permissions: https://github.com/codetheweb/muse/wiki/Configuring-Bot-Permissions.');
 };

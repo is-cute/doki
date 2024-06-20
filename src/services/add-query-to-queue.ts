@@ -84,14 +84,14 @@ export default class AddQueryToQueue {
           if (songs) {
             newSongs.push(...songs);
           } else {
-            throw new Error('that doesn\'t exist');
+            throw new Error('Unable to find selected song.');
           }
         }
       } else if (url.protocol === 'spotify:' || url.host === 'open.spotify.com') {
         const [convertedSongs, nSongsNotFound, totalSongs] = await this.getSongs.spotifySource(query, playlistLimit, shouldSplitChapters);
 
         if (totalSongs > playlistLimit) {
-          extraMsg = `a random sample of ${playlistLimit} songs was taken`;
+          extraMsg = `A random sample of ${playlistLimit} songs was taken.`;
         }
 
         if (totalSongs > playlistLimit && nSongsNotFound !== 0) {
@@ -100,9 +100,9 @@ export default class AddQueryToQueue {
 
         if (nSongsNotFound !== 0) {
           if (nSongsNotFound === 1) {
-            extraMsg += '1 song was not found';
+            extraMsg += '1 song was not found.';
           } else {
-            extraMsg += `${nSongsNotFound.toString()} songs were not found`;
+            extraMsg += `${nSongsNotFound.toString()} songs were not found.`;
           }
         }
 
@@ -113,7 +113,7 @@ export default class AddQueryToQueue {
         if (song) {
           newSongs.push(song);
         } else {
-          throw new Error('that doesn\'t exist');
+          throw new Error('Unable to find selected song.');
         }
       }
     } catch (_: unknown) {
@@ -123,12 +123,12 @@ export default class AddQueryToQueue {
       if (songs) {
         newSongs.push(...songs);
       } else {
-        throw new Error('that doesn\'t exist');
+        throw new Error('Unable to find selected song.');
       }
     }
 
     if (newSongs.length === 0) {
-      throw new Error('no songs found');
+      throw new Error('No songs were found.');
     }
 
     if (shuffleAdditions) {
@@ -158,7 +158,7 @@ export default class AddQueryToQueue {
       await player.play();
 
       if (wasPlayingSong) {
-        statusMsg = 'resuming playback';
+        statusMsg = 'Resuming playback';
       }
 
       await interaction.editReply({
@@ -183,9 +183,9 @@ export default class AddQueryToQueue {
     }
 
     if (newSongs.length === 1) {
-      await interaction.editReply(`u betcha, **${firstSong.title}** added to the${addToFrontOfQueue ? ' front of the' : ''} queue${extraMsg}`);
+      await interaction.editReply(`**${firstSong.title}** was added to the${addToFrontOfQueue ? ' front of the' : ''} queue${extraMsg}.`);
     } else {
-      await interaction.editReply(`u betcha, **${firstSong.title}** and ${newSongs.length - 1} other songs were added to the queue${extraMsg}`);
+      await interaction.editReply(`**${firstSong.title}** and ${newSongs.length - 1} other songs were added to the queue${extraMsg}.`);
     }
   }
 
@@ -233,13 +233,13 @@ export default class AddQueryToQueue {
       return song;
     } catch (e) {
       if (!(e instanceof Error)) {
-        console.error('Unexpected event occurred while fetching skip segments : ', e);
+        console.error('Unexpected event occurred while fetching skip segments: ', e);
         return song;
       }
 
       if (!e.message.includes('404')) {
         // Don't log 404 response, it just means that there are no segments for given video
-        console.warn(`Could not fetch skip segments for "${song.url}" :`, e);
+        console.warn(`Could not fetch skip segments for "${song.url}": `, e);
       }
 
       if (e.message.includes('504')) {

@@ -55,13 +55,13 @@ export const buildPlayingMessageEmbed = (player: Player): EmbedBuilder => {
   const currentlyPlaying = player.getCurrent();
 
   if (!currentlyPlaying) {
-    throw new Error('No playing song found');
+    throw new Error('No song found.');
   }
 
   const {artist, thumbnailUrl, requestedBy} = currentlyPlaying;
   const message = new EmbedBuilder();
   message
-    .setColor(player.status === STATUS.PLAYING ? 'DarkGreen' : 'DarkRed')
+    .setColor(player.status === STATUS.PLAYING ? 'Blurple' : 'DarkRed')
     .setTitle(player.status === STATUS.PLAYING ? 'Now Playing' : 'Paused')
     .setDescription(`
       **${getSongTitle(currentlyPlaying)}**
@@ -81,14 +81,14 @@ export const buildQueueEmbed = (player: Player, page: number): EmbedBuilder => {
   const currentlyPlaying = player.getCurrent();
 
   if (!currentlyPlaying) {
-    throw new Error('queue is empty');
+    throw new Error('Queue is currently empty.');
   }
 
   const queueSize = player.queueSize();
   const maxQueuePage = Math.ceil((queueSize + 1) / PAGE_SIZE);
 
   if (page > maxQueuePage) {
-    throw new Error('the queue isn\'t that big');
+    throw new Error('The selected page does not exist in the queue.');
   }
 
   const queuePageBegin = (page - 1) * PAGE_SIZE;
@@ -121,7 +121,7 @@ export const buildQueueEmbed = (player: Player, page: number): EmbedBuilder => {
 
   message
     .setTitle(player.status === STATUS.PLAYING ? `Now Playing ${player.loopCurrentSong ? '(loop on)' : ''}` : 'Queued songs')
-    .setColor(player.status === STATUS.PLAYING ? 'DarkGreen' : 'NotQuiteBlack')
+    .setColor(player.status === STATUS.PLAYING ? 'Blurple' : 'NotQuiteBlack')
     .setDescription(description)
     .addFields([{name: 'In queue', value: getQueueInfo(player), inline: true}, {
       name: 'Total length', value: `${totalLength > 0 ? prettyTime(totalLength) : '-'}`, inline: true,
